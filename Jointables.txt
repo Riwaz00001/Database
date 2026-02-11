@@ -1,0 +1,11 @@
+select order_id, Customers.customer_id, first_name,last_name, amount, age, country FROM Customers inner join Orders on
+Customers.customer_id=Orders.customer_id;
+
+select order_id, Customers.customer_id, first_name,last_name, amount, age, country FROM Customers left join Orders on
+Customers.customer_id=Orders.customer_id;
+
+
+select order_id, Customers.customer_id, first_name,last_name, amount, age, country FROM Customers right join Orders on
+Customers.customer_id=Orders.customer_id;
+
+select first_name, amount from Customers,Orders;
