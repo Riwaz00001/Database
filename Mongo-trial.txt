@@ -1,0 +1,129 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\A C E R> mongosh
+Current Mongosh Log ID: 69c0a4ea6f9af83676114029
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.1
+MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017
+PS C:\Users\A C E R> db.students.insertMany([{name:"Ram"},{}])
+At line:1 char:25
++ db.students.insertMany([{name:"Ram"},{}])
++                         ~
+Missing type name after '['.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingTypename
+
+PS C:\Users\A C E R> db.students.insertMany([{name:"Ram",age:18},{name:"Pratik",age:18},{name:"Arpit",age:16},{name:"Anisha",age:20}])
+At line:1 char:25
++ db.students.insertMany([{name:"Ram",age:18},{name:"Pratik",age:18},{n ...
++                         ~
+Missing type name after '['.
+At line:1 char:36
++ db.students.insertMany([{name:"Ram",age:18},{name:"Pratik",age:18},{n ...
++                                    ~
+Missing argument in parameter list.
+At line:1 char:59
++ db.students.insertMany([{name:"Ram",age:18},{name:"Pratik",age:18},{n ...
++                                                           ~
+Missing argument in parameter list.
+At line:1 char:81
++ ...
+ny([{name:"Ram",age:18},{name:"Pratik",age:18},{name:"Arpit",age:16}, ...
++                                                                 ~
+Missing argument in parameter list.
+At line:1 char:104
++ ...
+,{name:"Pratik",age:18},{name:"Arpit",age:16},{name:"Anisha",age:20}] ...
++                                                                 ~
+Missing argument in parameter list.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorReco
+   rdException
+    + FullyQualifiedErrorId : MissingTypename
+
+PS C:\Users\A C E R> mongosh
+Current Mongosh Log ID: 69c0a644734ae9959a114029
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.1
+MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017
+PS C:\Users\A C E R> mongosh --version
+2.8.1
+PS C:\Users\A C E R> Get-Service -Name MongoDB
+Get-Service : Cannot find any service with service name 'MongoDB'.
+At line:1 char:1
++ Get-Service -Name MongoDB
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (MongoDB:String) [Get-Servic
+   e], ServiceCommandException
+    + FullyQualifiedErrorId : NoServiceFoundForGivenName,Microsoft.PowerSh
+   ell.Commands.GetServiceCommand
+
+PS C:\Users\A C E R> & "C:\Program Files\MongoDB\Server\8.0\bin\mongod.exe" --version
+& : The term 'C:\Program Files\MongoDB\Server\8.0\bin\mongod.exe' is not
+recognized as the name of a cmdlet, function, script file, or operable
+program. Check the spelling of the name, or if a path was included, verify
+that the path is correct and try again.
+At line:1 char:3
++ & "C:\Program Files\MongoDB\Server\8.0\bin\mongod.exe" --version
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Program File...\bin\mong
+   od.exe:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\A C E R> mongosh "mongodb+srv://cluster0.t2q6cuj.mongodb.net/" --apiVersion 1 --username shresthariwaz77_db_user
+Enter password: ********
+Current Mongosh Log ID: 69c0a7aa7a11bed38c114029
+Connecting to:          mongodb+srv://<credentials>@cluster0.t2q6cuj.mongodb.net/?appName=mongosh+2.8.1
+Using MongoDB:          8.0.20 (API Version 1)
+Using Mongosh:          2.8.1
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+Atlas atlas-f5ovtq-shard-0 [primary] test> db.students.insertMany([{name:"Ram",age:18,{name:"Pratik",age:18},{name:"Riwaj",age:21},{name:"Raziv",age:24}])
+Uncaught:
+SyntaxError: Unexpected token (1:43)
+
+> 1 | db.students.insertMany([{name:"Ram",age:18,{name:"Pratik",age:18},{name:"Riwaj",age:21},{name:"Raziv",age:24}])
+    |                                            ^
+  2 |
+
+Atlas atlas-f5ovtq-shard-0 [primary] test> db.students.insertMany([{name:"Ram",age:18},{name:"Riwaj",age:17},{name:"Anisha",age:21},{name:"Sujan",age:35}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69c0a8a87a11bed38c11402a'),
+    '1': ObjectId('69c0a8a87a11bed38c11402b'),
+    '2': ObjectId('69c0a8a87a11bed38c11402c'),
+    '3': ObjectId('69c0a8a87a11bed38c11402d')
+  }
+}
+Atlas atlas-f5ovtq-shard-0 [primary] test> db.students.find({age:18})
+[ { _id: ObjectId('69c0a8a87a11bed38c11402a'), name: 'Ram', age: 18 } ]
+Atlas atlas-f5ovtq-shard-0 [primary] test> db.students.countDocuments()
+5
+Atlas atlas-f5ovtq-shard-0 [primary] test> db.students.find({age:{$gt:18}})
+[
+  { _id: ObjectId('69c0a8a87a11bed38c11402c'), name: 'Anisha', age: 21 },
+  { _id: ObjectId('69c0a8a87a11bed38c11402d'), name: 'Sujan', age: 35 }
+]
+Atlas atlas-f5ovtq-shard-0 [primary] test> db.students.find({age:{$lt:18}})
+[
+  { _id: ObjectId('69c0a8a87a11bed38c11402b'), name: 'Riwaj', age: 17 }
+]
+Atlas atlas-f5ovtq-shard-0 [primary] test> db.students.updateOne({name:"Ram"},{$set:{age:19}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-f5ovtq-shard-0 [primary] test> db.students.find().sort({age:1})
+[
+  { _id: ObjectId('69c09ef513c49e19004154a6') },
+  { _id: ObjectId('69c0a8a87a11bed38c11402b'), name: 'Riwaj', age: 17 },
+  { _id: ObjectId('69c0a8a87a11bed38c11402a'), name: 'Ram', age: 19 },
+  { _id: ObjectId('69c0a8a87a11bed38c11402c'), name: 'Anisha', age: 21 },
+  { _id: ObjectId('69c0a8a87a11bed38c11402d'), name: 'Sujan', age: 35 }
+]
+Atlas atlas-f5ovtq-shard-0 [primary] test>
